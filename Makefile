@@ -1,5 +1,5 @@
 KEDA_TOOLS_GO_VERSION = 1.26.5
-K6_VERSION = v0.47.0
+K6_VERSION = v1.8.0
 
 IMAGE_REGISTRY ?= ghcr.io
 IMAGE_REPO     ?= kedacore
