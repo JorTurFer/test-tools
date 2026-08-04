@@ -1,4 +1,4 @@
-FROM --platform=${BUILDPLATFORM} golang:1.25.6-alpine3.23 AS builder
+FROM --platform=${BUILDPLATFORM} golang:1.26.5-alpine3.23 AS builder
 WORKDIR $GOPATH/src/go.k6.io/k6
 RUN apk --no-cache add git
 
@@ -7,11 +7,11 @@ ARG TARGETARCH
 ARG K6_VERSION
 RUN go install go.k6.io/xk6/cmd/xk6@latest
 RUN GOOS="${TARGETOS}" GOARCH="${TARGETARCH}" xk6 build \
-        --k6-version "${K6_VERSION}" \
+        --k6-version="${K6_VERSION}" \
         --output /tmp/k6 \
         --with github.com/grafana/xk6-kubernetes@latest \
-        --with github.com/grafana/xk6-disruptor@latest \
-        --with github.com/JorTurFer/xk6-input-prometheus@latest
+        --with github.com/JorTurFer/xk6-input-prometheus@latest \
+        --with github.com/grafana/xk6-disruptor@latest
 
 # Runtime 
 FROM alpine:3.23 AS release
